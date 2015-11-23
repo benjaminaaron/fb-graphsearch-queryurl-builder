@@ -3,18 +3,90 @@
     <head>
         <title>Facebook Graph Search Query-URL Builder</title>
         <meta charset="UTF-8">
-        <!--
+        
         <script src="js/vendors/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
-        <link href="css/vendors/jquery-ui.min.css" rel="stylesheet" type="text/css">
-        -->
+        <script src="js/Template.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/Gender.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/Age.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/Location.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/Likes.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/FriendsWith.js" type="text/javascript" charset="utf-8"></script>
+
         <style>    
         </style>
     </head>
     <body>
+
+        <table border='0' align='center'>
+            <tbody>
+                <tr id='appendRow'>
+                    <td align='center'>
+                        <b>Facebook Graph Search Query-URL Builder</b>
+                    <td>
+                </tr>
+                <tr id='buttonRow'>
+                    <td>
+                        <div align='center'>
+                            set<br>
+                            <input type='button' value='gender' id='genderBtn'>
+                            <input type='button' value='age' id='ageBtn'>
+                            <input type='button' value='location' id='locationBtn'>
+                            <input type='button' value='likes' id='likesBtn'>
+                            <input type='button' value='friends with' id='friendswithBtn'>
+                        </div>
+                    <td>
+                </tr>
+                <tr>
+                    <td>
+                        <div align='center' id='queryURLdiv'>
+                            www.facebook.com/search/
+                        </div>
+                    <td>
+                </tr>
+            </tbody>
+        </table>
+        
         <script>
+
+            var appendRow = basicAppendRow = $('#appendRow');
+
+            $('#genderBtn').click(function() {
+                addTemplate(new Gender(this));
+            });
+
+            $('#ageBtn').click(function() {
+                addTemplate(new Age());
+            });
+
+            $('#locationBtn').click(function() {
+                addTemplate(new Location());
+            });
+            
+            $('#likesBtn').click(function() {
+                addTemplate(new Likes());
+            });
+            
+            $('#friendswithBtn').click(function() {
+                addTemplate(new FriendsWith());
+            });
+
+            var templates = [];
+
+            function addTemplate(template){                
+                template.index = templates.length;
+                if(templates.length == 0)
+                    template.parentTr = basicAppendRow;
+                templates.push(template);
+                updateQueryURL();
+            };
+            
+            function updateQueryURL(){
+                var queryURL = '';
+                for(var i in templates)
+                    queryURL += templates[i].getContrib() + '/';
+                $('#queryURLdiv').html('www.facebook.com/search/' + queryURL);
+            };
+
         </script>
-        
-        TODO...
-        
     </body>
 </html>
