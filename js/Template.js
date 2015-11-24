@@ -1,5 +1,8 @@
 
-var Template = function(title, btn){    
+var Template = function(title, btn){ 
+    
+    this.id = makeID();
+       
     if(btn){          
         $(btn).attr('disabled', 'true');
         this.btn = btn;
@@ -12,7 +15,7 @@ var Template = function(title, btn){
 
     this.td = $('<td/>').attr({
         'align' : 'center',
-        'class' : ''
+        'class' : 'frame'
     }).appendTo(this.tr);
     this.td.append('<b>' + title + '</b> ');
     

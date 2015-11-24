@@ -14,6 +14,27 @@
         <script src="js/FriendsWith.js" type="text/javascript" charset="utf-8"></script>
 
         <style>    
+        
+        html * {
+            font-family: Georgia, serif;
+        }
+        br {
+           display: block;
+           margin: 10px 0px;
+           content: '';
+        }
+        table {
+            border-collapse: separate;
+            border-spacing: 10px 30px;
+        }
+        td {
+            padding: 10px 10px 10px 10px;
+        }
+        
+        .frame {
+            border: 1px solid silver;
+        }
+        
         </style>
     </head>
     <body>
@@ -25,26 +46,25 @@
                 <tr id='appendRow'>
                     <td align='center'>
                         <b>Facebook Graph Search Query-URL Builder</b>
-                    <td>
+                    </td>
                 </tr>
                 <tr id='buttonRow'>
                     <td>
                         <div align='center'>
-                            set<br>
                             <input type='button' value='gender' id='genderBtn'>
                             <input type='button' value='age' id='ageBtn'>
                             <input type='button' value='location' id='locationBtn'>
                             <input type='button' value='likes' id='likesBtn'>
                             <input type='button' value='friends with' id='friendswithBtn'>
                         </div>
-                    <td>
+                    </td>
                 </tr>
                 <tr>
                     <td>
                         <div align='center' id='queryURLdiv'>
                             www.facebook.com/search/
                         </div>
-                    <td>
+                    </td>
                 </tr>
             </tbody>
         </table>
