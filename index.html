@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         
         <script src="js/vendors/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/utils.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/Template.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/Gender.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/Age.js" type="text/javascript" charset="utf-8"></script>
@@ -16,6 +17,8 @@
         </style>
     </head>
     <body>
+        
+        <script src="js/vendors/notie.js" type="text/javascript" charset="utf-8"></script>
 
         <table border='0' align='center'>
             <tbody>
@@ -55,7 +58,7 @@
             });
 
             $('#ageBtn').click(function() {
-                addTemplate(new Age());
+                addTemplate(new Age(this));
             });
 
             $('#locationBtn').click(function() {
@@ -84,7 +87,7 @@
                 var queryURL = '';
                 for(var i in templates)
                     queryURL += templates[i].getContrib() + '/';
-                $('#queryURLdiv').html('www.facebook.com/search/' + queryURL);
+                $('#queryURLdiv').html('www.facebook.com/search/' + queryURL + 'intersect');
             };
 
         </script>
