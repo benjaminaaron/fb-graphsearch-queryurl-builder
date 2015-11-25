@@ -36,12 +36,20 @@
             }
             #footer {
                 font-size: small;
-                color: #ddd;
+                color: #ccc;
                 width: 100%; 
                 text-align: center
             }
+            a {
+                text-decoration: none;
+                color: #999;
+            }
             #notie-alert-text a {
                 color: #fff;
+                text-decoration: underline;
+            }
+            #queryURL {
+                color: #C00;
             }
         </style>
     </head>
@@ -53,14 +61,14 @@
             <tbody>
                 <tr id='appendRow'>
                     <td align='center'>
-                        <h2>Facebook Graph Search Query-URL Builder</h2>
+                        <h2><font color='#00A'>Facebook Graph Search Query-URL Builder</font></h2>
                     </td>
                 </tr>
                 <tr id='buttonRow'>
                     <td>
                         <div align='center'>
                             <input type='button' value='friends with me' id='friendswithMeBtn'>
-                            <input type='button' value='gender' id='genderBtn' disabled='true'>
+                            <input type='button' value='gender' id='genderBtn'>
                             <input type='button' value='age' id='ageBtn'>
                             <input type='button' value='location' id='locationBtn'>
                             <input type='button' value='likes' id='likesBtn'>
@@ -72,10 +80,13 @@
             </tbody>
         </table>
         <div align='center'>
-            <a id="queryURL" target="_blank" href="http://facebook.com/search"><small>facebook.com/search/</small></a>
+            <a id="queryURL" target="_blank" href="http://facebook.com/search">&rarr; facebook.com/search/</a>
         </div>
-        <br>&nbsp;<br>&nbsp;<br>
-        <div id="footer"><p>@benjaminaaron, Nov 2015</p></div>
+        <br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
+        <div id="footer">
+            @benjaminaaron, Nov 2015<br>
+            <a target="_blank" href="https://www.quora.com/Facebook-Graph-Search/Has-Graph-Search-been-removed-from-Facebook">more info</a> about the remains of fb graph search
+        </div>
         
         <script>
         
@@ -117,13 +128,10 @@
                     template.parentTr = basicAppendRow;
                 templates.push(template);
                 updateQueryURL();
-                                
-                if(templates.length == 1) //TODO not safe
-                    $('#genderBtn').removeAttr('disabled');
             };
             
             function updateQueryURL(){
-                var queryURL = '';
+                var queryURL = 'facebook.com/search/';
                 for(var i in templates)
                     queryURL += templates[i].getContrib() + '/';
                 if(templates.length == 1) 
@@ -132,8 +140,8 @@
                 if(templates.length > 1) 
                     queryURL += 'intersect/';    
                 $('#queryURL')
-                    .html('<small>facebook.com/search/</small>' + queryURL)
-                    .attr('href', 'http://facebook.com/search/' + queryURL);
+                    .html(' &rarr; ' + queryURL)
+                    .attr('href', 'http://' + queryURL);
             };
 
         </script>

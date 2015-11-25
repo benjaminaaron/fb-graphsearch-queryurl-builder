@@ -10,7 +10,7 @@ var Template = function(title, btn, infoText){
         this.btn = btn;
     }
     
-    this.tr = $('<tr/>');
+    this.tr = $('<tr/>');    
     $(this.tr).insertAfter(appendRow).closest('tr');
     this.parentTr = appendRow; //to restore it in destroy
     appendRow = this.tr;
@@ -19,7 +19,8 @@ var Template = function(title, btn, infoText){
         'align' : 'center',
         'class' : 'frame'
     }).appendTo(this.tr);
-    this.td.append('<font size="5" color="#800000"><b>' + title + '</b></font> ');
+    
+    this.td.append('<font size="4.5" color="#800000"><b>' + title + '</b></font> ');
     
     this.td.append('&nbsp;&nbsp;');
     
@@ -57,9 +58,12 @@ Template.prototype = {
         this.tr.remove();
         templates.splice(this.index, 1);
         
-        if(templates.length == 0) //TODO fix index
-            location.reload();
-        else                
-            updateQueryURL();
+        //ensure working indizes and correct appendRow
+        if(templates.length == 0)
+            appendRow = basicAppendRow;
+        for(var i in templates)
+            templates[i].index = i;
+                
+        updateQueryURL();
     }
 };
