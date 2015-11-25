@@ -57,7 +57,6 @@ var Age = function(btn){
             notie.alert(3, 'that\'s not a number', 1);
         updateQueryURL();
     });
-    
 };
 
 Age.prototype = {
@@ -78,5 +77,4 @@ Age.prototype = {
         
         return parseInt(val) + '/' + ageStr;
     }
-    
 };

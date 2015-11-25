@@ -1,6 +1,9 @@
 
 var Location = function(btn){
-    Template.call(this, 'location', btn);
+    
+    var infoText = 'it works in many cases by inputing strings like <i>Berlin, Germany</i><br>but to be on the safe side you may search the place on facebook and use the id visible in the URL here<br>in <a href="https://www.facebook.com/places/Things-to-do-in-Berlin-Germany/111175118906315/">this page</a> for Berlin the id <i>111175118906315</i> can be found in the URL';
+        
+    Template.call(this, 'location', btn, infoText);
            
     this.homeResidents = $('<input/>').attr({
         'type' : 'radio',
@@ -32,19 +35,11 @@ var Location = function(btn){
         'value' : 'Berlin, Germany',
         'size' : 30
     }).appendTo(this.td).keyup(function() { updateQueryURL(); });
-    
 };
 
 Location.prototype = {
     __proto__: Template.prototype,
-    
-    /*
-    home-residents
-    residents/present
-    residents/past
-    visitors
-    */
-    
+
     getContrib: function(){
         var type = '';
         if($(this.homeResidents).is(':checked')) type = 'home-residents';
@@ -61,5 +56,4 @@ Location.prototype = {
         
         return 'str/' + val + '/pages-named/' + type;
     }
-    
 };

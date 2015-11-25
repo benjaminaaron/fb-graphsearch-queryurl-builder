@@ -7,34 +7,41 @@
         <script src="js/vendors/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/utils.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/Template.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/FriendsWithMe.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/Gender.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/Age.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/Location.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/Likes.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/FriendsWith.js" type="text/javascript" charset="utf-8"></script>
 
-        <style>    
-        
-        html * {
-            font-family: Georgia, serif;
-        }
-        br {
-           display: block;
-           margin: 10px 0px;
-           content: '';
-        }
-        table {
-            border-collapse: separate;
-            border-spacing: 10px 30px;
-        }
-        td {
-            padding: 10px 10px 10px 10px;
-        }
-        
-        .frame {
-            border: 1px solid silver;
-        }
-        
+        <style>
+            html * {
+                font-family: Georgia, serif;
+            }
+            br {
+               display: block;
+               margin: 10px 0px;
+               content: '';
+            }
+            table {
+                border-collapse: separate;
+                border-spacing: 10px 30px;
+            }
+            td {
+                padding: 10px 10px 10px 10px;
+            }
+            .frame {
+                border: 1px solid #ddd;
+            }
+            #footer {
+                font-size: small;
+                color: #ddd;
+                width: 100%; 
+                text-align: center
+            }
+            #notie-alert-text a {
+                color: #fff;
+            }
         </style>
     </head>
     <body>
@@ -45,31 +52,37 @@
             <tbody>
                 <tr id='appendRow'>
                     <td align='center'>
-                        <b>Facebook Graph Search Query-URL Builder</b>
+                        <h2>Facebook Graph Search Query-URL Builder</h2>
                     </td>
                 </tr>
                 <tr id='buttonRow'>
                     <td>
                         <div align='center'>
-                            <input type='button' value='gender' id='genderBtn'>
+                            <input type='button' value='friends with me' id='friendswithMeBtn'>
+                            <input type='button' value='gender' id='genderBtn' disabled='true'>
                             <input type='button' value='age' id='ageBtn'>
                             <input type='button' value='location' id='locationBtn'>
                             <input type='button' value='likes' id='likesBtn'>
                             <input type='button' value='friends with' id='friendswithBtn'>
-                            <input type='button' value='friends with me' id='friendswithMeBtn'>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
         <div align='center'>
-            <a id="queryURL" href="http://facebook.com/search"><small>facebook.com/search/</small></a>
+            <a id="queryURL" target="_blank" href="http://facebook.com/search"><small>facebook.com/search/</small></a>
         </div>
+        <br>&nbsp;<br>&nbsp;<br>
+        <div id="footer"><p>@benjaminaaron, Nov 2015</p></div>
         
         <script>
-
+        
             var appendRow = basicAppendRow = $('#appendRow');
 
+            $('#friendswithMeBtn').click(function() {
+                addTemplate(new FriendsWithMe(this));
+            });
+            
             $('#genderBtn').click(function() {
                 addTemplate(new Gender(this));
             });
@@ -90,10 +103,6 @@
                 addTemplate(new FriendsWith());
             });
 
-            $('#friendswithMeBtn').click(function() {
-                addTemplate(new FriendsWithMe());
-            });
-
             var templates = [];
 
             function addTemplate(template){                
@@ -102,6 +111,9 @@
                     template.parentTr = basicAppendRow;
                 templates.push(template);
                 updateQueryURL();
+                                
+                if(templates.length == 1) //TODO not safe
+                    $('#genderBtn').removeAttr('disabled');
             };
             
             function updateQueryURL(){

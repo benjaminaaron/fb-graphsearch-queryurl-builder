@@ -1,13 +1,15 @@
 
 var Likes = function(btn){
-    Template.call(this, 'likes', btn);
+    
+    var infoText = 'lists people who like pages that contain what you enter here in the page-title';
+        
+    Template.call(this, 'likes', btn, infoText);
     
     this.likesField = $('<input/>').attr({
         'type' : 'text',
         'value' : 'Sustainability',
         'size' : 30
-    }).appendTo(this.td).keyup(function() { updateQueryURL(); });
-           
+    }).appendTo(this.td).keyup(function() { updateQueryURL(); });       
 };
 
 Likes.prototype = {
@@ -16,12 +18,9 @@ Likes.prototype = {
     getContrib: function(){
         var val = $(this.likesField).val();
         
-        if(val == parseInt(val))
-            return val + '/likers';
         if(val.length == 0)
-            return '_NO-LIKE_/likers';
+            val = '_NO_LIKE_';
         
-        return 'str/' + val + '/likers';
+        return 'str/' + val + '/pages-named/likers';
     }
-    
 };

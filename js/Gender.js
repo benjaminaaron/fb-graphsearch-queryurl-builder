@@ -20,7 +20,6 @@ Gender.prototype = {
     __proto__: Template.prototype,
     
     getContrib: function(){
-        return $(this.maleRadioBtn).is(':checked') ? 'male' : 'female';
+        return $(this.maleRadioBtn).is(':checked') ? 'males' : 'females';
     }
-    
 };

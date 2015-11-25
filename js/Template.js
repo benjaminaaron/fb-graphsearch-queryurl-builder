@@ -1,8 +1,9 @@
 
-var Template = function(title, btn){ 
+var Template = function(title, btn, infoText){ 
     
-    this.requireIntersect = false;
     this.id = makeID();
+    this.title = title;
+    this.requireIntersect = false;
        
     if(btn){          
         $(btn).attr('disabled', 'true');
@@ -18,17 +19,29 @@ var Template = function(title, btn){
         'align' : 'center',
         'class' : 'frame'
     }).appendTo(this.tr);
-    this.td.append('<b>' + title + '</b> ');
+    this.td.append('<font size="5" color="#800000"><b>' + title + '</b></font> ');
+    
+    this.td.append('&nbsp;&nbsp;');
     
     var removeLink = $('<a/>').attr({
         'href' : '#',
-    }).appendTo(this.td).append('<small>remove</small></br>');
+    }).appendTo(this.td).append('<small>[remove]</small>');
     
+    if(infoText){
+        this.td.append('&nbsp;&nbsp;&nbsp;');
+        var infoIcon = $('<img/>').attr({
+            'width' : '18px',
+            'src' : 'files/info.png'
+        }).appendTo(this.td).click(function(){
+            notie.alert(1, infoText, 10);
+        });
+    }
+    this.td.append('<br>');
+
     var self = this;
     removeLink.click(function() {
         self.destroy();
     });
-
 };
 
 Template.prototype = {
@@ -36,15 +49,14 @@ Template.prototype = {
     destroy: function(){
         if(this.btn)                
             $(this.btn).removeAttr('disabled');
-            
+        
         var newestTemplate = templates[templates.length - 1];    
         if(this.index == newestTemplate.index)
             appendRow = this.parentTr;            
         
         this.tr.remove();
         templates.splice(this.index, 1);
-        
+                
         updateQueryURL();
-    }        
-    
+    }
 };
