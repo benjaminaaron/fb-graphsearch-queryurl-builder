@@ -8,25 +8,26 @@ var Age = function(btn){
         'type' : 'radio',
         'name': 'age',
         'checked': 'true'
-    }).appendTo(this.td).click(function() { updateQueryURL(); $(self.ageField2).hide(); });
+    }).appendTo(this.td).click(function() { self.requireIntersect = false; updateQueryURL(); $(self.ageField2).hide(); });
     this.td.append('=');
     
     this.younger = $('<input/>').attr({
         'type' : 'radio',
         'name': 'age'
-    }).appendTo(this.td).click(function() { updateQueryURL(); $(self.ageField2).hide(); });
+    }).appendTo(this.td).click(function() { self.requireIntersect = false; updateQueryURL(); $(self.ageField2).hide(); });
     this.td.append('<');
     
     this.older = $('<input/>').attr({
         'type' : 'radio',
         'name': 'age'
-    }).appendTo(this.td).click(function() { updateQueryURL(); $(self.ageField2).hide(); });
+    }).appendTo(this.td).click(function() { self.requireIntersect = false; updateQueryURL(); $(self.ageField2).hide(); });
     this.td.append('>');
     
     this.btwn = $('<input/>').attr({
         'type' : 'radio',
         'name': 'age'
-    }).appendTo(this.td).click(function() {         
+    }).appendTo(this.td).click(function() {  
+        self.requireIntersect = true;       
         $(self.ageField2).show();
         updateQueryURL(); 
     });
@@ -52,11 +53,9 @@ var Age = function(btn){
         'style': 'display:none'
     }).appendTo(this.td).keyup(function() { 
         var val = $(this).val();
-        if(val.length > 0){
-            if(val != parseInt(val))
-                notie.alert(3, 'that\'s not a number', 1);
-            updateQueryURL();
-        }
+        if(val.length > 0 && val != parseInt(val))
+            notie.alert(3, 'that\'s not a number', 1);
+        updateQueryURL();
     });
     
 };
@@ -66,16 +65,18 @@ Age.prototype = {
     
     getContrib: function(){        
         var ageStr = '';
+        var val = $(this.ageField).val();
                 
-        if($(this.btwn).is(':checked')){
-            ageStr = '_TODO_';
-            return parseInt($(this.ageField).val()) + '/users-older/' + parseInt($(this.ageField2).val()) + '/users-younger'; 
-        } 
+        if($(this.btwn).is(':checked'))
+            return parseInt(val) + '/users-older/' + parseInt($(this.ageField2).val()) + '/users-younger'; 
         if($(this.exactly).is(':checked')) ageStr = 'users-age';
         if($(this.younger).is(':checked')) ageStr = 'users-younger';
         if($(this.older).is(':checked')) ageStr = 'users-older';
         
-        return parseInt($(this.ageField).val()) + '/' + ageStr;
+        if(val.length == 0)
+            return '_NO-AGE_/' + ageStr;
+        
+        return parseInt(val) + '/' + ageStr;
     }
     
 };

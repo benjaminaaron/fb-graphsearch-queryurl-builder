@@ -56,18 +56,15 @@
                             <input type='button' value='location' id='locationBtn'>
                             <input type='button' value='likes' id='likesBtn'>
                             <input type='button' value='friends with' id='friendswithBtn'>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div align='center' id='queryURLdiv'>
-                            www.facebook.com/search/
+                            <input type='button' value='friends with me' id='friendswithMeBtn'>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <div align='center'>
+            <a id="queryURL" href="http://facebook.com/search"><small>facebook.com/search/</small></a>
+        </div>
         
         <script>
 
@@ -93,6 +90,10 @@
                 addTemplate(new FriendsWith());
             });
 
+            $('#friendswithMeBtn').click(function() {
+                addTemplate(new FriendsWithMe());
+            });
+
             var templates = [];
 
             function addTemplate(template){                
@@ -107,7 +108,14 @@
                 var queryURL = '';
                 for(var i in templates)
                     queryURL += templates[i].getContrib() + '/';
-                $('#queryURLdiv').html('www.facebook.com/search/' + queryURL + 'intersect');
+                if(templates.length == 1) 
+                    if(templates[0].requireIntersect)
+                        queryURL += 'intersect/';
+                if(templates.length > 1) 
+                    queryURL += 'intersect/';    
+                $('#queryURL')
+                    .html('<small>facebook.com/search/</small>' + queryURL)
+                    .attr('href', 'http://facebook.com/search/' + queryURL);
             };
 
         </script>

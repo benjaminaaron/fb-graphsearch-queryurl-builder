@@ -38,27 +38,28 @@ var Location = function(btn){
 Location.prototype = {
     __proto__: Template.prototype,
     
-    
     /*
-    
     home-residents
     residents/present
     residents/past
     visitors
-    
     */
     
-    
     getContrib: function(){
+        var type = '';
+        if($(this.homeResidents).is(':checked')) type = 'home-residents';
+        if($(this.residentsPresent).is(':checked')) type = 'residents/present';
+        if($(this.residentsPast).is(':checked')) type = 'residents/past';
+        if($(this.visitors).is(':checked')) type = 'visitors';
         
         var val = $(this.locationField).val();
-
-        if(val == parseInt(val)){
-            
-        }
         
+        if(val == parseInt(val))
+            return val + '/' + type;
+        if(val.length == 0)
+            return '_NO-LOCATION_/' + type;
         
-        return '';
+        return 'str/' + val + '/pages-named/' + type;
     }
     
 };

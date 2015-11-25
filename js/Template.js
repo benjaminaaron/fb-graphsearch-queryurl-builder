@@ -1,6 +1,7 @@
 
 var Template = function(title, btn){ 
     
+    this.requireIntersect = false;
     this.id = makeID();
        
     if(btn){          
@@ -42,6 +43,8 @@ Template.prototype = {
         
         this.tr.remove();
         templates.splice(this.index, 1);
+        
+        updateQueryURL();
     }        
     
 };
