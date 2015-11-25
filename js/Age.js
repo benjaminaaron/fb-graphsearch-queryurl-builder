@@ -9,19 +9,19 @@ var Age = function(btn){
         'name': 'age',
         'checked': 'true'
     }).appendTo(this.td).click(function() { self.requireIntersect = false; updateQueryURL(); $(self.ageField2).hide(); });
-    this.td.append('=');
+    this.td.append('exactly');
     
     this.younger = $('<input/>').attr({
         'type' : 'radio',
         'name': 'age'
     }).appendTo(this.td).click(function() { self.requireIntersect = false; updateQueryURL(); $(self.ageField2).hide(); });
-    this.td.append('<');
+    this.td.append('younger than');
     
     this.older = $('<input/>').attr({
         'type' : 'radio',
         'name': 'age'
     }).appendTo(this.td).click(function() { self.requireIntersect = false; updateQueryURL(); $(self.ageField2).hide(); });
-    this.td.append('>');
+    this.td.append('older than');
     
     this.btwn = $('<input/>').attr({
         'type' : 'radio',
@@ -31,24 +31,22 @@ var Age = function(btn){
         $(self.ageField2).show();
         updateQueryURL(); 
     });
-    this.td.append('> <<br>');
+    this.td.append('between<br>');
     
     this.ageField = $('<input/>').attr({
         'type' : 'text',
-        'value' : '30',
+        'value' : '25',
         'size' : 4
     }).appendTo(this.td).keyup(function() { 
         var val = $(this).val();
-        if(val.length > 0){
-            if(val != parseInt(val))
-                notie.alert(3, 'that\'s not a number', 1);
-            updateQueryURL();
-        }
+        if(val.length > 0 && val != parseInt(val))
+            notie.alert(3, 'that\'s not a number', 1);
+        updateQueryURL();
     });
     
     this.ageField2 = $('<input/>').attr({
         'type' : 'text',
-        'value' : '30',
+        'value' : '35',
         'size' : 4,
         'style': 'display:none'
     }).appendTo(this.td).keyup(function() { 
