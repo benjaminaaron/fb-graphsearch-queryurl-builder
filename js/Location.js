@@ -1,32 +1,32 @@
 
 var Location = function(btn){
     
-    var infoText = 'it works in many cases by inputing strings like <i>Berlin, Germany</i><br>but to be on the safe side you may search the place on facebook and use the id visible in the URL here<br>in <a href="https://www.facebook.com/places/Things-to-do-in-Berlin-Germany/111175118906315/">this page</a> for Berlin the id <i>111175118906315</i> can be found in the URL';
+    var infoText = 'it works in many cases by inputing strings like <i>Berlin, Germany</i> <small>(english and comma country)</small><br>but to be on the safe side you may search the place on facebook and use the id visible in the URL here<br>in <a href="https://www.facebook.com/places/Things-to-do-in-Berlin-Germany/111175118906315/">this page</a> for Berlin the id <i>111175118906315</i> can be found in the URL';
         
     Template.call(this, 'location', btn, infoText);
            
     this.homeResidents = $('<input/>').attr({
         'type' : 'radio',
-        'name': 'location_' + this.id,
-        'checked': 'true'
+        'name' : 'location_' + this.id
     }).appendTo(this.td).click(function() { updateQueryURL(); });
     this.td.append('hometown');
     
     this.residentsPresent = $('<input/>').attr({
         'type' : 'radio',
-        'name': 'location_' + this.id
+        'name' : 'location_' + this.id,
+        'checked' : 'true'
     }).appendTo(this.td).click(function() { updateQueryURL(); });
     this.td.append('live there');
     
     this.residentsPast = $('<input/>').attr({
         'type' : 'radio',
-        'name': 'location_' + this.id
+        'name' : 'location_' + this.id
     }).appendTo(this.td).click(function() { updateQueryURL(); });
     this.td.append('lived there');
     
     this.visitors = $('<input/>').attr({
         'type' : 'radio',
-        'name': 'location_' + this.id
+        'name' : 'location_' + this.id
     }).appendTo(this.td).click(function() { updateQueryURL(); });
     this.td.append('visited<br>');
     

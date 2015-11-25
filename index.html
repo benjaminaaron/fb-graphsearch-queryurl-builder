@@ -7,13 +7,13 @@
         <script src="js/vendors/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/utils.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/Template.js" type="text/javascript" charset="utf-8"></script>
-        <script src="js/FriendsWithMe.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/Gender.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/RshipStatus.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/Age.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/Location.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/Likes.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/FriendsWithMe.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/FriendsWith.js" type="text/javascript" charset="utf-8"></script>
-        <script src="js/RshipStatus.js" type="text/javascript" charset="utf-8"></script>
 
         <style>
             html * {
@@ -67,13 +67,13 @@
                 <tr id='buttonRow'>
                     <td>
                         <div align='center'>
-                            <input type='button' value='friends with me' id='friendswithMeBtn'>
-                            <input type='button' value='gender' id='genderBtn'>
+                            <input type='button' value='gender' id='genderBtn' disabled='true'>
+                            <input type='button' value='relationship status' id='rshipStatusBtn'>
                             <input type='button' value='age' id='ageBtn'>
                             <input type='button' value='location' id='locationBtn'>
                             <input type='button' value='likes' id='likesBtn'>
+                            <input type='button' value='friends with me' id='friendswithMeBtn'>
                             <input type='button' value='friends with' id='friendswithBtn'>
-                            <input type='button' value='relationship status' id='rshipStatusBtn'>
                         </div>
                     </td>
                 </tr>
@@ -84,20 +84,26 @@
         </div>
         <br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
         <div id="footer">
-            @benjaminaaron, Nov 2015<br>
-            <a target="_blank" href="https://www.quora.com/Facebook-Graph-Search/Has-Graph-Search-been-removed-from-Facebook">more info</a> about the remains of fb graph search
+            if you make the query too long you might get no results or it'll not be understood by fb<br>
+            if you find a bug or have an idea, please let me know by <a id="emailLink" href="#">email</a> or write <a target="_blank" href="https://github.com/benjaminaaron/fb-queryurl-builder/issues">an issue on GitHub</a><br>
+            <a target="_blank" href="https://www.quora.com/Facebook-Graph-Search/Has-Graph-Search-been-removed-from-Facebook">more info</a> about the remains of fb graph search<br>
+            <i>@benjaminaaron, Nov 2015</i>
         </div>
         
         <script>
         
-            var appendRow = basicAppendRow = $('#appendRow');
-
-            $('#friendswithMeBtn').click(function() {
-                addTemplate(new FriendsWithMe(this));
+            $('#emailLink').click(function() {
+                notie.alert(2, 'b.degenhart.study@gmail.com', 4);
             });
+        
+            var appendRow = basicAppendRow = $('#appendRow');
             
             $('#genderBtn').click(function() {
                 addTemplate(new Gender(this));
+            });
+            
+            $('#rshipStatusBtn').click(function() {
+                addTemplate(new RshipStatus(this));
             });
 
             $('#ageBtn').click(function() {
@@ -112,12 +118,12 @@
                 addTemplate(new Likes());
             });
             
-            $('#friendswithBtn').click(function() {
-                addTemplate(new FriendsWith());
+            $('#friendswithMeBtn').click(function() {
+                addTemplate(new FriendsWithMe(this));
             });
             
-            $('#rshipStatusBtn').click(function() {
-                addTemplate(new RshipStatus(this));
+            $('#friendswithBtn').click(function() {
+                addTemplate(new FriendsWith());
             });
 
             var templates = [];
@@ -142,6 +148,15 @@
                 $('#queryURL')
                     .html(' &rarr; ' + queryURL)
                     .attr('href', 'http://' + queryURL);
+                
+                 //TODO make smarter
+                if(templates.length > 0)    
+                    $('#genderBtn').removeAttr('disabled');
+                else 
+                    $('#genderBtn').attr('disabled', 'true');
+                if(templates.length == 1)
+                    if(templates[0].title == 'gender')
+                        templates[0].destroy();
             };
 
         </script>
