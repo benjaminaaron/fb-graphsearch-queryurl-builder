@@ -13,6 +13,7 @@
         <script src="js/Location.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/Likes.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/FriendsWith.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/RshipStatus.js" type="text/javascript" charset="utf-8"></script>
 
         <style>
             html * {
@@ -64,6 +65,7 @@
                             <input type='button' value='location' id='locationBtn'>
                             <input type='button' value='likes' id='likesBtn'>
                             <input type='button' value='friends with' id='friendswithBtn'>
+                            <input type='button' value='relationship status' id='rshipStatusBtn'>
                         </div>
                     </td>
                 </tr>
@@ -101,6 +103,10 @@
             
             $('#friendswithBtn').click(function() {
                 addTemplate(new FriendsWith());
+            });
+            
+            $('#rshipStatusBtn').click(function() {
+                addTemplate(new RshipStatus(this));
             });
 
             var templates = [];

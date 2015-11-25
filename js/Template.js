@@ -53,10 +53,13 @@ Template.prototype = {
         var newestTemplate = templates[templates.length - 1];    
         if(this.index == newestTemplate.index)
             appendRow = this.parentTr;            
-        
+
         this.tr.remove();
         templates.splice(this.index, 1);
-                
-        updateQueryURL();
+        
+        if(templates.length == 0) //TODO fix index
+            location.reload();
+        else                
+            updateQueryURL();
     }
 };
