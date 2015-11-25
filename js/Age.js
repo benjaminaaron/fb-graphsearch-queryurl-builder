@@ -73,7 +73,7 @@ Age.prototype = {
         if($(this.older).is(':checked')) ageStr = 'users-older';
         
         if(val.length == 0)
-            return '_NO-AGE_/' + ageStr;
+            return '';
         
         return parseInt(val) + '/' + ageStr;
     }

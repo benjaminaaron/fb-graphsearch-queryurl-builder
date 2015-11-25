@@ -19,7 +19,7 @@ Likes.prototype = {
         var val = $(this.likesField).val();
         
         if(val.length == 0)
-            val = '_NO_LIKE_';
+            return '';
         
         return 'str/' + val + '/pages-named/likers';
     }

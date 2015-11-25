@@ -35,6 +35,6 @@ FriendsWith.prototype = {
         if(val == parseInt(val))
             return val + '/' + friendsLevel;
         else
-            return '_NO-USER-ID_/' + friendsLevel;
+            return '';
     }
 };

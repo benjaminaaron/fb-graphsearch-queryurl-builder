@@ -52,7 +52,7 @@ Location.prototype = {
         if(val == parseInt(val))
             return val + '/' + type;
         if(val.length == 0)
-            return '_NO-LOCATION_/' + type;
+            return '';
         
         return 'str/' + val + '/pages-named/' + type;
     }

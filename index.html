@@ -138,8 +138,12 @@
             
             function updateQueryURL(){
                 var queryURL = 'facebook.com/search/';
-                for(var i in templates)
-                    queryURL += templates[i].getContrib() + '/';
+                for(var i in templates){
+                    var templateContrib = templates[i].getContrib();
+                    if(templateContrib.length == 0)
+                        notie.alert(3, 'input field without value, use <i>[remove]</i> instead of leaving it blank', 2);
+                    queryURL += templateContrib + '/';
+                }
                 if(templates.length == 1) 
                     if(templates[0].requireIntersect)
                         queryURL += 'intersect/';
