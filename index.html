@@ -32,9 +32,9 @@
             td {
                 padding: 10px 10px 10px 10px;
             }
-            .frame {
-                border: 1px solid #ddd;
-            }
+            /*.frame {
+              border: 1px solid #ddd;
+            }*/
             #footer {
                 font-size: small;
                 color: #ccc;
@@ -51,6 +51,9 @@
             }
             #queryURL {
                 color: #C00;
+            }
+            #queryURLbuilderContainer {
+              background-color: #FFFFEE;
             }
             hr {
               border: 0;
@@ -71,33 +74,34 @@
           <hr>
         </div>
 
-        <table border='0' align='center'>
-            <tbody>
-                <tr id='appendRow'>
-                    <td></td>
-                </tr>
-                <tr id='buttonRow'>
-                    <td>
-                        <div align='center'>
-                            <input type='button' value='name' id='nameBtn'>
-                            <input type='button' value='gender' id='genderBtn'>
-                            <input type='button' value='relationship status' id='rshipStatusBtn'>
-                            <input type='button' value='age' id='ageBtn'>
-                            <input type='button' value='location' id='locationBtn'>
-                            <input type='button' value='likes' id='likesBtn'>
-                            <input type='button' value='friends with me' id='friendswithMeBtn'>
-                            <input type='button' value='friends with' id='friendswithBtn'>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div align='center'>
-            <a id="queryURL" target="_blank" href="http://facebook.com/search">&rarr; facebook.com/search/</a>
+        <div id="queryURLbuilderContainer">
+          <table border='0' align='center'>
+              <tbody>
+                  <tr id='appendRow'>
+                      <td></td>
+                  </tr>
+                  <tr id='buttonRow'>
+                      <td>
+                          <div align='center'>
+                              <input type='button' value='name' id='nameBtn'>
+                              <input type='button' value='gender' id='genderBtn'>
+                              <input type='button' value='relationship status' id='rshipStatusBtn'>
+                              <input type='button' value='age' id='ageBtn'>
+                              <input type='button' value='location' id='locationBtn'>
+                              <input type='button' value='likes' id='likesBtn'>
+                              <input type='button' value='friends with me' id='friendswithMeBtn'>
+                              <input type='button' value='friends with' id='friendswithBtn'>
+                          </div>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+          <div align='center'>
+              <a id="queryURL" target="_blank" href="http://facebook.com/search">&rarr; facebook.com/search/</a>
+          </div>
+          <br>&nbsp;<br>&nbsp;<br>
         </div>
-        <br>&nbsp;<br>&nbsp;<br>
-        <hr>
-        
+        <hr>  
         <div align='center'>
           <small><font color='#AAA'><b>interesting direct links</b>:<br>
             <a target="_blank" href="https://www.facebook.com/ads/preferences/edit/">your Ad Preferences</a>, what fb thinks you care about<br>
@@ -175,7 +179,7 @@
                 for(var i in templates){
                     var templateContrib = templates[i].getContrib();
                     if(templateContrib.length == 0)
-                        notie.alert(3, 'input field without value, use <i>[remove]</i> instead of leaving it blank', 2);
+                        notie.alert(3, 'input field without value, use [x] to remove it instead of leaving it blank', 2);
                     queryURL += templateContrib + '/';
                 }
                 if(templates.length == 1){

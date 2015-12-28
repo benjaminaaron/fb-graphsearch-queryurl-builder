@@ -26,7 +26,7 @@ var Template = function(title, btn, infoText){
     
     var removeLink = $('<a/>').attr({
         'href' : '#',
-    }).appendTo(this.td).append('<small>[remove]</small>');
+    }).appendTo(this.td).append('<small>[x]</small>');
     
     if(infoText){
         this.td.append('&nbsp;&nbsp;&nbsp;');
