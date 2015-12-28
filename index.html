@@ -7,6 +7,7 @@
         <script src="js/vendors/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/utils.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/Template.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/Name.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/Gender.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/RshipStatus.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/Age.js" type="text/javascript" charset="utf-8"></script>
@@ -41,7 +42,7 @@
                 text-align: center
             }
             a {
-                text-decoration: none;
+                /*text-decoration: none;*/
                 color: #999;
             }
             #notie-alert-text a {
@@ -51,24 +52,35 @@
             #queryURL {
                 color: #C00;
             }
+            hr {
+              border: 0;
+              height: 0;
+              border-top: 1px solid rgba(0, 0, 0, 0.1);
+              border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            }
         </style>
     </head>
     <body>
         
         <script src="js/vendors/notie.js" type="text/javascript" charset="utf-8"></script>
+        
+        <div align='center'>
+          <h2><font color='#00A'>Facebook Graph Search Query-URL Builder</font></h2>
+          <small><font color='#AAA'>only works if fb language is <b>English (US)</b> (change <a target="_blank" href="https://www.facebook.com/settings?tab=language">here</a>), doesn't work on mobile
+          <br>if you make the query too long you might get no results or it'll not be understood by fb</font></small>
+          <hr>
+        </div>
 
         <table border='0' align='center'>
             <tbody>
                 <tr id='appendRow'>
-                    <td align='center'>
-                        <h2><font color='#00A'>Facebook Graph Search Query-URL Builder</font></h2>
-                        <small><font color='#AAA'>only works if fb language is <b>English (US)</b> (change <a target="_blank" href="https://www.facebook.com/settings?tab=language">here</a>), doesn't work on mobile</font></small>
-                    </td>
+                    <td></td>
                 </tr>
                 <tr id='buttonRow'>
                     <td>
                         <div align='center'>
-                            <input type='button' value='gender' id='genderBtn' disabled='true'>
+                            <input type='button' value='name' id='nameBtn'>
+                            <input type='button' value='gender' id='genderBtn'>
                             <input type='button' value='relationship status' id='rshipStatusBtn'>
                             <input type='button' value='age' id='ageBtn'>
                             <input type='button' value='location' id='locationBtn'>
@@ -83,12 +95,24 @@
         <div align='center'>
             <a id="queryURL" target="_blank" href="http://facebook.com/search">&rarr; facebook.com/search/</a>
         </div>
-        <br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
+        <br>&nbsp;<br>&nbsp;<br>
+        <hr>
+        
+        <div align='center'>
+          <small><font color='#AAA'><b>interesting direct links</b>:<br>
+            <a target="_blank" href="https://www.facebook.com/ads/preferences/edit/">your Ad Preferences</a>, what fb thinks you care about<br>
+            <a target="_blank" href="https://www.facebook.com/deactivate">deactivation page</a>, see who fb thinks will miss you<br>
+            <a target="_blank" href="https://www.facebook.com/messages/pending">Message Requests</a>, formerly "other inbox"<br>
+            ...know of another one?
+          </font></small>
+        </div>
+        
+        
+        <hr>
         <div id="footer">
-            if you make the query too long you might get no results or it'll not be understood by fb<br>
             if you find a bug or have an idea, please let me know by <a id="emailLink" href="#">email</a> or write <a target="_blank" href="https://github.com/benjaminaaron/fb-queryurl-builder/issues">an issue on GitHub</a><br>
             <a target="_blank" href="https://www.quora.com/Facebook-Graph-Search/Has-Graph-Search-been-removed-from-Facebook">more info</a> about the remains of fb graph search<br>
-            <i>@benjaminaaron, Nov 2015</i>
+            <i><a target="_blank" href="https://github.com/benjaminaaron">@benjaminaaron</a>, Dec 2015</i>
         </div>
         
         <script>
@@ -98,6 +122,10 @@
             });
         
             var appendRow = basicAppendRow = $('#appendRow');
+            
+            $('#nameBtn').click(function() {
+                addTemplate(new Name(this));
+            });
             
             $('#genderBtn').click(function() {
                 addTemplate(new Gender(this));
@@ -138,30 +166,26 @@
             };
             
             function updateQueryURL(){
+              if(templates.length == 1)
+                  if(templates[0].title == 'gender')
+                    notie.alert(3, 'search for gender alone doesn\'t work, add at least one other parameter', 2);
+                    
                 var queryURL = 'facebook.com/search/';
+                
                 for(var i in templates){
                     var templateContrib = templates[i].getContrib();
                     if(templateContrib.length == 0)
                         notie.alert(3, 'input field without value, use <i>[remove]</i> instead of leaving it blank', 2);
                     queryURL += templateContrib + '/';
                 }
-                if(templates.length == 1) 
+                if(templates.length == 1){
                     if(templates[0].requireIntersect)
                         queryURL += 'intersect/';
-                if(templates.length > 1) 
+                } else 
                     queryURL += 'intersect/';    
                 $('#queryURL')
                     .html(' &rarr; ' + queryURL)
                     .attr('href', 'http://' + queryURL);
-                
-                 //TODO make smarter
-                if(templates.length > 0)    
-                    $('#genderBtn').removeAttr('disabled');
-                else 
-                    $('#genderBtn').attr('disabled', 'true');
-                if(templates.length == 1)
-                    if(templates[0].title == 'gender')
-                        templates[0].destroy();
             };
 
         </script>

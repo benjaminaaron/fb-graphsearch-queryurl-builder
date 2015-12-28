@@ -34,7 +34,7 @@ var Template = function(title, btn, infoText){
             'width' : '18px',
             'src' : 'files/info.png'
         }).appendTo(this.td).click(function(){
-            notie.alert(1, infoText, 10);
+            notie.alert(1, infoText, 8);
         });
     }
     this.td.append('<br>');
