@@ -16,12 +16,10 @@
         <script src="js/options/FriendsWithMe.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/options/FriendsWith.js" type="text/javascript" charset="utf-8"></script>
         
-        <!-- TODO
         <script src="js/options/Studies.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/options/Workplace.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/options/Visited.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/options/Group.js" type="text/javascript" charset="utf-8"></script>
-        -->
         
         <style>
             html * {
@@ -98,6 +96,10 @@
                               <input type='button' value='likes' id='likesBtn'>
                               <input type='button' value='friends with me' id='friendswithMeBtn'>
                               <input type='button' value='friends with' id='friendswithBtn'>
+                              <input type='button' value='studies' id='studiesBtn'>
+                              <input type='button' value='workplace' id='workplaceBtn'>
+                              <input type='button' value='groups' id='groupsBtn'>
+                              <input type='button' value='visited' id='visitedBtn'>
                           </div>
                       </td>
                   </tr>
@@ -165,6 +167,22 @@
             $('#friendswithBtn').click(function() {
                 addTemplate(new FriendsWith());
             });
+            
+            $('#studiesBtn').click(function() {
+                addTemplate(new Studies());
+            });
+            
+            $('#workplaceBtn').click(function() {
+                addTemplate(new Workplace());
+            });
+            
+            $('#groupsBtn').click(function() {
+                addTemplate(new Group());
+            });
+            
+            $('#visitedBtn').click(function() {
+                addTemplate(new Visited());
+            });
 
             var templates = [];
 
@@ -188,12 +206,13 @@
                     if(templateContrib.length == 0)
                         notie.alert(3, 'input field without value, use [x] to remove it instead of leaving it blank', 2);
                     queryURL += templateContrib + '/';
-                }
+                }    
                 if(templates.length == 1){
                     if(templates[0].requireIntersect)
                         queryURL += 'intersect/';
                 } else 
-                    queryURL += 'intersect/';    
+                    if(templates.length > 0)
+                        queryURL += 'intersect/';    
                 $('#queryURL')
                     .html(' &rarr; ' + queryURL)
                     .attr('href', 'http://' + queryURL);
